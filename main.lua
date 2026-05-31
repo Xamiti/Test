@@ -107,6 +107,7 @@ function PlayerAtStart(Name)
         Name.LastTime = Name.Time
         Name.lastLapTime = Name.currentLapTime
         Name.currentLapTime = 0
+        Name.wasAtStart = true
         Name.wasAtsec1 = false
         Name.wasAtsec2 = false
         Name.Lap = Name.Lap + 1
@@ -128,10 +129,10 @@ function PlayerAtSec1(Name)
                 if Name.sec1 < Track.bestsec1 then
                     ChatBox.sendMessage(Name.Name .. " " .. Name.sec1, "Sec 1", "<>", "&5")
                 else
-                    ChatBox.sendMessageToPlayer(Name.sec1, Name.Name, "Sec 1", "<>", "&a")
+                    ChatBox.sendMessageToPlayer("Sec1: " .. Name.sec1, Name.Name, "Sec 1", "<>", "&a")
                 end
             else
-                ChatBox.sendMessageToPlayer(Name.sec1, Name.Name, "Sec 1", "<>", "&7")
+                ChatBox.sendMessageToPlayer("Sec1: " .. Name.sec1, Name.Name, "Sec 1", "<>", "&7")
             end
 
             Name.LastTime = Name.Time
@@ -153,10 +154,10 @@ function PlayerAtSec2(Name)
                 if Name.sec2 < Track.bestsec2 then
                     ChatBox.sendMessage(Name.Name .. " " .. Name.sec2, "Sec 2", "<>", "&5")
                 else
-                    ChatBox.sendMessageToPlayer(Name.sec2, Name.Name, "Sec 2", "<>", "&a")
+                    ChatBox.sendMessageToPlayer("Sec2: " .. Name.sec2, Name.Name, "Sec 2", "<>", "&a")
                 end
             else
-                ChatBox.sendMessageToPlayer(Name.sec2, Name.Name, "Sec 2", "<>", "&7")
+                ChatBox.sendMessageToPlayer("Sec2: " .. Name.sec2, Name.Name, "Sec 2", "<>", "&7")
             end
 
             Name.LastTime = Name.Time
