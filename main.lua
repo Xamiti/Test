@@ -1,37 +1,31 @@
-Detector = peripheral.find("playerDetector")
-ChatBox = peripheral.find("chatBox")
+Detector = peripheral.wrap("player_detector_0")
+ChatBox = peripheral.wrap("chat_box_1")
 IsRace = false
-IsTraining = false
+IsTraining = true
 IsQualifying = false
 
-PointA = {x = 0, y = 0, z = 0}
-PointB = {x = 0, y = 0, z = 0}
+PointA = {x = -4239, y = 50, z = -3658}
+PointB = {x = -3927, y = 80, z = -3122}
 
 Track = {
-    StartX1 = 0,
-    StartX2 = 0,
-    StartY1 = 0,
-    StartY2 = 0,
-    StartZ1 = 0,
-    StartZ2 = 0,
-    sec1X1 = 0,
-    sec1X2 = 0,
-    sec1Y1 = 0,
-    sec1Y2 = 0,
-    sec1Z1 = 0,
-    sec1Z2 = 0,
-    sec2X1 = 0,
-    sec2X2 = 0,
-    sec2Y1 = 0,
-    sec2Y2 = 0,
-    sec2Z1 = 0,
-    sec2Z2 = 0,
-    sec3X1 = 0,
-    sec3X2 = 0,
-    sec3Y1 = 0,
-    sec3Y2 = 0,
-    sec3Z1 = 0,
-    sec3Z2 = 0,
+    StartX1 = -3980,
+    StartX2 = -3959,
+    StartY1 = 68,
+    StartY2 = 71,
+    StartZ1 = -3241,
+    StartZ2 = -3237,
+    sec1X1 = -4112,
+    sec1X2 = -4104,
+    sec1Y1 = 63,
+    sec1Y2 = 66,
+    sec1Z1 = -3361,
+    sec1Z2 = -3346,
+    sec2X1 = -4198,
+    sec2X2 = -4181,
+    sec2Y1 = 70,
+    sec2Y2 = 73,
+    sec2Z1 = -3492,
+    sec2Z2 = -3498,
     bestLapTime = 0,
     bestsec1 = 0,
     bestsec2 = 0,
@@ -124,7 +118,7 @@ Die Funktion ermittelt ob der Spieler sich über die Linie von Sektor 1 bewegt h
 individuellen Spielers verglichen ebenso mit der allgemeinen Bestzeit und jenachdem ausgegeben.
 ]]
 function PlayerAtSec1(Name)
-    if Name.X >= Track.sec1X1 and Name.X <= Track.sec1X2 and Name.Y >= Track.sec1Y1 and Name.Y <= Track.sec1Y2 and Name.Z >= Track.sec1Z1 and Name.Z <= Track.sec1Z2 then
+    if Name.X >= ((0.533 * Name.Z) - 2324) and Name.X <= ((0.533 * Name.Z) - 2320) and Name.Y >= Track.sec1Y1 and Name.Y <= Track.sec1Y2 and Name.Z >= Track.sec1Z1 and Name.Z <= Track.sec1Z2 then
         if Name.wasAtStart then
             Name.Time = os.time()
             Name.sec1 = Name.Time - Name.LastTime
@@ -149,7 +143,7 @@ function PlayerAtSec1(Name)
 end
 
 function PlayerAtSec2(Name)
-    if Name.X >= Track.sec2X1 and Name.X <= Track.sec2X2 and Name.Y >= Track.sec2Y1 and Name.Y <= Track.sec2Y2 and Name.Z >= Track.sec2Z1 and Name.Z <= Track.sec2Z2 then
+    if Name.X >= Track.sec2X1 and Name.X <= Track.sec2X2 and Name.Y >= Track.sec2Y1 and Name.Y <= Track.sec2Y2 and Name.Z >= ((-0.353 * Name.X) - 4112) and Name.Z <= ((-0.353 * Name.X) - 4108) then
         if Name.wasAtStart and Name.wasAtsec1 then
             Name.Time = os.time()
             Name.sec2 = Name.Time - Name.LastTime
