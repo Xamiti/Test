@@ -67,7 +67,6 @@ gespeichert. zuletzt wird alles für die erfasung einer neuen Rundenzeit vorbere
 function PlayerAtStart(Name)
     if Name.X >= Track.StartX1 and Name.X <= Track.StartX2 and Name.Y >= Track.StartY1 and Name.Y <= Track.StartY2 and Name.Z >= Track.StartZ1 and Name.Z <= Track.StartZ2 then
         Name.Time = os.time()
-        ChatBox.sendMessage("Bastard")
         if Name.wasAtStart and Name.wasAtsec1 and Name.wasAtsec2 then
 
             Name.sec3 = Name.Time - Name.LastTime
@@ -91,7 +90,7 @@ function PlayerAtStart(Name)
                 Name.bestsec1 = Name.sec1
                 Name.bestsec2 = Name.sec2
                 Name.bestsec3 = Name.sec3
-                if Name.currentLapTime < Track.bestLapTime then
+                if Name.currentLapTime < Track.bestLapTime or Track.bestLapTime == 0 then
                     Track.bestLapTime = Name.currentLapTime
                     Track.bestsec1 = Name.sec1
                     Track.bestsec2 = Name.sec2
