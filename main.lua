@@ -120,13 +120,13 @@ individuellen Spielers verglichen ebenso mit der allgemeinen Bestzeit und jenach
 ]]
 function PlayerAtSec1(Name)
     if Name.X >= ((0.533 * Name.Z) - 2324) and Name.X <= ((0.533 * Name.Z) - 2320) and Name.Y >= Track.sec1Y1 and Name.Y <= Track.sec1Y2 and Name.Z >= Track.sec1Z1 and Name.Z <= Track.sec1Z2 then
-        if Name.wasAtStart then
+        if Name.wasAtStart and not Name.wasAtsec1 then
             Name.Time = os.time()
             Name.sec1 = Name.Time - Name.LastTime
             Name.currentLapTime = Name.currentLapTime + Name.sec1
                 -- Ausgabe der Sektorzeit über Chatbox an Spieler oder alle
             if Name.sec1 < Name.bestsec1 or Name.bestsec1 == 0 then
-                if Name.sec1 < Track.bestsec1 then
+                if Name.sec1 < Track.bestsec1  or Track.bestsec1 == 0 then
                     ChatBox.sendMessage(Name.Name .. " " .. Name.sec1, "Sec 1", "<>", "&5")
                 else
                     ChatBox.sendMessageToPlayer("Sec1: " .. Name.sec1, Name.Name, "Sec 1", "<>", "&a")
@@ -145,13 +145,13 @@ end
 
 function PlayerAtSec2(Name)
     if Name.X >= Track.sec2X1 and Name.X <= Track.sec2X2 and Name.Y >= Track.sec2Y1 and Name.Y <= Track.sec2Y2 and Name.Z >= ((-0.353 * Name.X) - 4112) and Name.Z <= ((-0.353 * Name.X) - 4108) then
-        if Name.wasAtStart and Name.wasAtsec1 then
+        if Name.wasAtStart and Name.wasAtsec1 and not Name.wasAtsec2 then
             Name.Time = os.time()
             Name.sec2 = Name.Time - Name.LastTime
             Name.currentLapTime = Name.currentLapTime + Name.sec2
                 -- Ausgabe der Sektorzeit über Chatbox an Spieler oder alle
             if Name.sec2 < Name.bestsec2 or Name.bestsec2 == 0 then
-                if Name.sec2 < Track.bestsec2 then
+                if Name.sec2 < Track.bestsec2 or Track.bestsec2 == 0 then
                     ChatBox.sendMessage(Name.Name .. " " .. Name.sec2, "Sec 2", "<>", "&5")
                 else
                     ChatBox.sendMessageToPlayer("Sec2: " .. Name.sec2, Name.Name, "Sec 2", "<>", "&a")
