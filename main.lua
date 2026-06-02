@@ -102,7 +102,8 @@ function PlayerAtStart(Name)
             else
                 ChatBox.sendMessageToPlayer(Name.currentLapTime, Name.Name, "Lap", "<>", "&7")
             end
-
+        else
+            ChatBox.sendMessageToPlayer("Invalid Round", Name.Name, "...", "<>", "&c")
         end
         Name.LastTime = Name.Time
         Name.lastLapTime = Name.currentLapTime
@@ -144,7 +145,7 @@ function PlayerAtSec1(Name)
 end
 
 function PlayerAtSec2(Name)
-    if Name.X >= Track.sec2X1 and Name.X <= Track.sec2X2 and Name.Y >= Track.sec2Y1 and Name.Y <= Track.sec2Y2 and Name.Z >= ((-0.353 * Name.X) - 4112) and Name.Z <= ((-0.353 * Name.X) - 4108) then
+    if Name.X >= Track.sec2X1 and Name.X <= Track.sec2X2 and Name.Y >= Track.sec2Y1 and Name.Y <= Track.sec2Y2 and Name.Z >= ((-0.353 * Name.X) - 4977) and Name.Z <= ((-0.353 * Name.X) - 4973) then
         if Name.wasAtStart and Name.wasAtsec1 and not Name.wasAtsec2 then
             Name.Time = os.time()
             Name.sec2 = Name.Time - Name.LastTime
