@@ -85,7 +85,7 @@ function PlayerAtStart(Name)
             Name.currentLapTime = Name.sec1 + Name.sec2 + Name.sec3
 
             if Name.currentLapTime < Name.bestLapTime or Name.bestLapTime == 0 then
-                ChatBox.sendMessage("kleiner N")
+                ChatBox.sendMessage("1")
                 Name.bestLapTime = Name.currentLapTime
                 Name.bestsec1 = Name.sec1
                 Name.bestsec2 = Name.sec2
@@ -103,11 +103,11 @@ function PlayerAtStart(Name)
                 end
 
                 if Name.currentLapTime < Track.bestLapTime or Track.bestLapTime == 0 then
-                    ChatBox.sendMessage("kleiner Bastard")
+                    ChatBox.sendMessage("2")
                     Track.bestLapTime = Name.currentLapTime
                     ChatBox.sendMessage(Name.Name .. " " .. Name.currentLapTime, "Lap", "<>", "&5")
                 else
-                    ChatBox.sendMessage("Dumme Fotze")
+                    ChatBox.sendMessage("3")
                     ChatBox.sendMessageToPlayer(tostring(Name.currentLapTime), Name.Name, "Lap","<>", "&a")
                 end
             else
