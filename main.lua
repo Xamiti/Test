@@ -111,7 +111,7 @@ function PlayerAtStart(Name)
                     ChatBox.sendMessageToPlayer(tostring(Name.currentLapTime), Name.Name, "Lap","<>", "&a")
                 end
             else
-                ChatBox.sendMessage("Dumme Hure")
+                ChatBox.sendMessage("4")
                 ChatBox.sendMessageToPlayer(tostring(Name.currentLapTime), Name.Name, "Lap", "<>", "&7")
             end
         else
