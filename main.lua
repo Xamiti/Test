@@ -103,7 +103,7 @@ function PlayerAtStart(Name)
                 end
 
                 if Name.currentLapTime < Track.bestLapTime or Track.bestLapTime == 0 then
-                    ChatBox.sendMessage("2")
+                    ChatBox.sendMessage(Name.Name .. " " .. Name.currentLapTime, "Lap", "<>", "&5")
                     Track.bestLapTime = Name.currentLapTime
                     ChatBox.sendMessage(Name.Name .. " " .. Name.currentLapTime, "Lap", "<>", "&5")
                 else
