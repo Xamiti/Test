@@ -79,22 +79,30 @@ function PlayerAtStart(Name)
                     ChatBox.sendMessageToPlayer(tostring(Name.sec3), Name.Name, "Sec 3", "<>", "&a") 
                 end
             else
-                ChatBox.sendMessageToPlayer(Name.sec3, Name.Name, "Sec 3", "<>", "&7")
+                ChatBox.sendMessageToPlayer(tostring(Name.sec3), Name.Name, "Sec 3", "<>", "&7")
             end
 
             Name.currentLapTime = Name.sec1 + Name.sec2 + Name.sec3
 
-            -- Überschreiben der besten Lap Time wenn schneller und Ausgabe über Chatbox an Spieler oder alle
             if Name.currentLapTime < Name.bestLapTime or Name.bestLapTime == 0 then
                 Name.bestLapTime = Name.currentLapTime
                 Name.bestsec1 = Name.sec1
                 Name.bestsec2 = Name.sec2
                 Name.bestsec3 = Name.sec3
+                if Name.bestsec1 < Track.bestsec1 or Track.bestsec1 == 0 then
+                    Track.bestsec1 = Name.bestsec1
+                end
+
+                if Name.bestsec2 < Track.bestsec2 or Track.bestsec2 == 0 then
+                    Track.bestsec2 = Name.bestsec2
+                end
+
+                if Name.bestsec3 < Track.bestsec3 or Track.bestsec3 == 0 then
+                    Track.bestsec3 = Name.bestsec3
+                end
+                
                 if Name.currentLapTime < Track.bestLapTime or Track.bestLapTime == 0 then
                     Track.bestLapTime = Name.currentLapTime
-                    Track.bestsec1 = Name.sec1
-                    Track.bestsec2 = Name.sec2
-                    Track.bestsec3 = Name.sec3
                     ChatBox.sendMessage(Name.Name .. " " .. Name.currentLapTime, "Lap", "<>", "&5")
                 else
                     ChatBox.sendMessageToPlayer(tostring(Name.currentLapTime), Name.Name, "Lap","<>", "&a")
