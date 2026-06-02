@@ -1,5 +1,5 @@
-Detector = peripheral.wrap("player_detector_0")
-ChatBox = peripheral.wrap("chat_box_1")
+Detector = peripheral.wrap("player_detector_1")
+ChatBox = peripheral.wrap("chat_box_2")
 IsRace = false
 IsTraining = true
 IsQualifying = false
@@ -67,16 +67,17 @@ gespeichert. zuletzt wird alles für die erfasung einer neuen Rundenzeit vorbere
 function PlayerAtStart(Name)
     if Name.X >= Track.StartX1 and Name.X <= Track.StartX2 and Name.Y >= Track.StartY1 and Name.Y <= Track.StartY2 and Name.Z >= Track.StartZ1 and Name.Z <= Track.StartZ2 then
         Name.Time = os.time()
+        ChatBox.sendMessage("Bastard")
         if Name.wasAtStart and Name.wasAtsec1 and Name.wasAtsec2 then
 
             Name.sec3 = Name.Time - Name.LastTime
 
             --Überschreiben Sektor 3 Zeit wenn schneller und Ausgabe über Chatbox der Sektorzeit an Spieler oder alle
             if Name.sec3 < Name.bestsec3 or Name.bestsec3 == 0 then
-                if Name.sec3 < Track.bestsec3 then
+                if Name.sec3 < Track.bestsec3 or Track.bestsec3 == 0 then
                     ChatBox.sendMessage(Name.Name .. " " .. Name.sec3,"Sec 3", "<>", "&5")
                 else
-                    ChatBox.sendMessageToPlayer(Name.sec3, Name.Name, "Sec 3", "<>", "&a")
+                    ChatBox.sendMessageToPlayer(tostring(Name.sec3), Name.Name, "Sec 3", "<>", "&a") 
                 end
             else
                 ChatBox.sendMessageToPlayer(Name.sec3, Name.Name, "Sec 3", "<>", "&7")
@@ -97,10 +98,10 @@ function PlayerAtStart(Name)
                     Track.bestsec3 = Name.sec3
                     ChatBox.sendMessage(Name.Name .. " " .. Name.currentLapTime, "Lap", "<>", "&5")
                 else
-                    ChatBox.sendMessageToPlayer(Name.currentLapTime, Name.Name, "Lap","<>", "&a")
+                    ChatBox.sendMessageToPlayer(tostring(Name.currentLapTime), Name.Name, "Lap","<>", "&a")
                 end
             else
-                ChatBox.sendMessageToPlayer(Name.currentLapTime, Name.Name, "Lap", "<>", "&7")
+                ChatBox.sendMessageToPlayer(tostring(Name.currentLapTime), Name.Name, "Lap", "<>", "&7")
             end
         else
             ChatBox.sendMessageToPlayer("Invalid Round", Name.Name, "...", "<>", "&c")
@@ -130,10 +131,10 @@ function PlayerAtSec1(Name)
                 if Name.sec1 < Track.bestsec1  or Track.bestsec1 == 0 then
                     ChatBox.sendMessage(Name.Name .. " " .. Name.sec1, "Sec 1", "<>", "&5")
                 else
-                    ChatBox.sendMessageToPlayer("Sec1: " .. Name.sec1, Name.Name, "Sec 1", "<>", "&a")
+                    ChatBox.sendMessageToPlayer(tostring(Name.sec1), Name.Name, "Sec 1", "<>", "&a")
                 end
             else
-                ChatBox.sendMessageToPlayer("Sec1: " .. Name.sec1, Name.Name, "Sec 1", "<>", "&7")
+                ChatBox.sendMessageToPlayer(tostring(Name.sec1), Name.Name, "Sec 1", "<>", "&7")
             end
 
             Name.LastTime = Name.Time
@@ -155,10 +156,10 @@ function PlayerAtSec2(Name)
                 if Name.sec2 < Track.bestsec2 or Track.bestsec2 == 0 then
                     ChatBox.sendMessage(Name.Name .. " " .. Name.sec2, "Sec 2", "<>", "&5")
                 else
-                    ChatBox.sendMessageToPlayer("Sec2: " .. Name.sec2, Name.Name, "Sec 2", "<>", "&a")
+                    ChatBox.sendMessageToPlayer(tostring(Name.sec2), Name.Name, "Sec 2", "<>", "&a")
                 end
             else
-                ChatBox.sendMessageToPlayer("Sec2: " .. Name.sec2, Name.Name, "Sec 2", "<>", "&7")
+                ChatBox.sendMessageToPlayer(tostring(Name.sec2), Name.Name, "Sec 2", "<>", "&7")
             end
 
             Name.LastTime = Name.Time
