@@ -52,6 +52,53 @@ XamYT = {
     wasAtStart = false,
     wasAtsec1 = false,
     wasAtsec2 = false,
+    LapCompletet = false
+}
+
+Z3RR0N = {
+    Name = "Z3RR0N",
+    X = 0,
+    Y = 0,
+    Z = 0,
+    Lap = 0,
+    LastTime = 0,
+    Time = 0,
+    currentLapTime = 0,
+    bestLapTime = 0,
+    lastLapTime = 0,
+    sec1 = 0,
+    bestsec1 = 0,
+    sec2 = 0,
+    bestsec2 = 0,
+    sec3 = 0,
+    bestsec3 = 0,
+    wasAtStart = false,
+    wasAtsec1 = false,
+    wasAtsec2 = false,
+    LapCompletet = false
+}
+
+MustiYil = {
+    Name = "MustiYil",
+    X = 0,
+    Y = 0,
+    Z = 0,
+    Lap = 0,
+    LastTime = 0,
+    Time = 0,
+    currentLapTime = 0,
+    bestLapTime = 0,
+    lastLapTime = 0,
+    sec1 = 0,
+    bestsec1 = 0,
+    sec2 = 0,
+    bestsec2 = 0,
+    sec3 = 0,
+    bestsec3 = 0,
+    wasAtStart = false,
+    wasAtsec1 = false,
+    wasAtsec2 = false,
+    LapCompletet = false
 }
 
 function UpdatePlayerPos(Name)
@@ -111,7 +158,6 @@ function PlayerAtStart(Name)
                     ChatBox.sendMessageToPlayer(tostring(Name.currentLapTime), Name.Name, "Lap","<>", "&a")
                 end
             else
-                ChatBox.sendMessage("4")
                 ChatBox.sendMessageToPlayer(tostring(Name.currentLapTime), Name.Name, "Lap", "<>", "&7")
             end
         else
@@ -120,7 +166,8 @@ function PlayerAtStart(Name)
         Name.LastTime = Name.Time
         Name.lastLapTime = Name.currentLapTime
         Name.currentLapTime = 0
-        Name.wasAtStart = true
+        Name.LapCompletet = true
+        Name.wasAtStart = false
         Name.wasAtsec1 = false
         Name.wasAtsec2 = false
         Name.Lap = Name.Lap + 1
@@ -132,51 +179,57 @@ Die Funktion ermittelt ob der Spieler sich über die Linie von Sektor 1 bewegt h
 individuellen Spielers verglichen ebenso mit der allgemeinen Bestzeit und jenachdem ausgegeben.
 ]]
 function PlayerAtSec1(Name)
-    if Name.X >= ((0.533 * Name.Z) - 2324) and Name.X <= ((0.533 * Name.Z) - 2320) and Name.Y >= Track.sec1Y1 and Name.Y <= Track.sec1Y2 and Name.Z >= Track.sec1Z1 and Name.Z <= Track.sec1Z2 then
-        if Name.wasAtStart and not Name.wasAtsec1 then
-            Name.Time = os.time()
-            Name.sec1 = Name.Time - Name.LastTime
-            Name.currentLapTime = Name.currentLapTime + Name.sec1
-                -- Ausgabe der Sektorzeit über Chatbox an Spieler oder alle
-            if Name.sec1 < Name.bestsec1 or Name.bestsec1 == 0 then
-                if Name.sec1 < Track.bestsec1  or Track.bestsec1 == 0 then
-                    ChatBox.sendMessage(Name.Name .. " " .. Name.sec1, "Sec 1", "<>", "&5")
+    if not Name.wasAtsec1 then
+        if Name.X >= ((0.533 * Name.Z) - 2326) and Name.X <= ((0.533 * Name.Z) - 2320) and Name.Y >= Track.sec1Y1 and Name.Y <= Track.sec1Y2 and Name.Z >= Track.sec1Z1 and Name.Z <= Track.sec1Z2 then
+            if Name.LapCompletet then
+                Name.Time = os.time()
+                Name.sec1 = Name.Time - Name.LastTime
+                Name.currentLapTime = Name.currentLapTime + Name.sec1
+                    -- Ausgabe der Sektorzeit über Chatbox an Spieler oder alle
+                if Name.sec1 < Name.bestsec1 or Name.bestsec1 == 0 then
+                    if Name.sec1 < Track.bestsec1  or Track.bestsec1 == 0 then
+                        ChatBox.sendMessage(Name.Name .. " " .. Name.sec1, "Sec 1", "<>", "&5")
+                    else
+                        ChatBox.sendMessageToPlayer(tostring(Name.sec1), Name.Name, "Sec 1", "<>", "&a")
+                    end
                 else
-                    ChatBox.sendMessageToPlayer(tostring(Name.sec1), Name.Name, "Sec 1", "<>", "&a")
+                    ChatBox.sendMessageToPlayer(tostring(Name.sec1), Name.Name, "Sec 1", "<>", "&7")
                 end
-            else
-                ChatBox.sendMessageToPlayer(tostring(Name.sec1), Name.Name, "Sec 1", "<>", "&7")
-            end
 
-            Name.LastTime = Name.Time
-            Name.wasAtsec1 = true
-        else
-            ChatBox.sendMessageToPlayer("Invalid Round", Name.Name, "...", "<>", "&c")
+                Name.LastTime = Name.Time
+                Name.wasAtsec1 = true
+                Name.wasAtStart = true
+                Name.LapCompletet = false
+            else
+                ChatBox.sendMessageToPlayer("Invalid Round", Name.Name, "...", "<>", "&c")
+            end
         end
     end
 end
 
 function PlayerAtSec2(Name)
-    if Name.X >= Track.sec2X1 and Name.X <= Track.sec2X2 and Name.Y >= Track.sec2Y1 and Name.Y <= Track.sec2Y2 and Name.Z >= ((-0.353 * Name.X) - 4977) and Name.Z <= ((-0.353 * Name.X) - 4973) then
-        if Name.wasAtStart and Name.wasAtsec1 and not Name.wasAtsec2 then
-            Name.Time = os.time()
-            Name.sec2 = Name.Time - Name.LastTime
-            Name.currentLapTime = Name.currentLapTime + Name.sec2
-                -- Ausgabe der Sektorzeit über Chatbox an Spieler oder alle
-            if Name.sec2 < Name.bestsec2 or Name.bestsec2 == 0 then
-                if Name.sec2 < Track.bestsec2 or Track.bestsec2 == 0 then
-                    ChatBox.sendMessage(Name.Name .. " " .. Name.sec2, "Sec 2", "<>", "&5")
+    if not Name.wasAtsec2 then
+        if Name.X >= Track.sec2X1 and Name.X <= Track.sec2X2 and Name.Y >= Track.sec2Y1 and Name.Y <= Track.sec2Y2 and Name.Z >= ((-0.353 * Name.X) - 4979) and Name.Z <= ((-0.353 * Name.X) - 4973) then
+            if Name.wasAtStart and Name.wasAtsec1 then
+                Name.Time = os.time()
+                Name.sec2 = Name.Time - Name.LastTime
+                Name.currentLapTime = Name.currentLapTime + Name.sec2
+                    -- Ausgabe der Sektorzeit über Chatbox an Spieler oder alle
+                if Name.sec2 < Name.bestsec2 or Name.bestsec2 == 0 then
+                    if Name.sec2 < Track.bestsec2 or Track.bestsec2 == 0 then
+                        ChatBox.sendMessage(Name.Name .. " " .. Name.sec2, "Sec 2", "<>", "&5")
+                    else
+                        ChatBox.sendMessageToPlayer(tostring(Name.sec2), Name.Name, "Sec 2", "<>", "&a")
+                    end
                 else
-                    ChatBox.sendMessageToPlayer(tostring(Name.sec2), Name.Name, "Sec 2", "<>", "&a")
+                    ChatBox.sendMessageToPlayer(tostring(Name.sec2), Name.Name, "Sec 2", "<>", "&7")
                 end
-            else
-                ChatBox.sendMessageToPlayer(tostring(Name.sec2), Name.Name, "Sec 2", "<>", "&7")
-            end
 
-            Name.LastTime = Name.Time
-            Name.wasAtsec2 = true
-        else
-            ChatBox.sendMessageToPlayer("Invalid Round", Name.Name, "...", "<>", "&c")
+                Name.LastTime = Name.Time
+                Name.wasAtsec2 = true
+            else
+                ChatBox.sendMessageToPlayer("Invalid Round", Name.Name, "...", "<>", "&c")
+            end
         end
     end
 end
@@ -187,6 +240,14 @@ while IsTraining do
     PlayerAtStart(XamYT)
     PlayerAtSec1(XamYT)
     PlayerAtSec2(XamYT)
+    UpdatePlayerPos(Z3RR0N)
+    PlayerAtStart(Z3RR0N)
+    PlayerAtSec1(Z3RR0N)
+    PlayerAtSec2(Z3RR0N)
+    UpdatePlayerPos(MustiYil)
+    PlayerAtStart(MustiYil)
+    PlayerAtSec1(MustiYil)
+    PlayerAtSec2(MustiYil)
     if Detector.getPlayersInCoords(PointA, PointB) == nil then
         IsTraining = false
     end
