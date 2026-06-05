@@ -199,10 +199,10 @@ while IsTraining do
     for i, Name in ipairs(playerData) do
         
 
-        UpdatePlayerPos(playerData[i].Name)
-        PlayerAtStart(playerData[i].Name)
-        PlayerAtSec1(playerData[i].Name)
-        PlayerAtSec2(playerData[i].Name)
+        UpdatePlayerPos(playerData[i])
+        PlayerAtStart(playerData[i])
+        PlayerAtSec1(playerData[i])
+        PlayerAtSec2(playerData[i])
         if Detector.getPlayersInCoords(PointA, PointB) == nil then
             IsTraining = false
         end
