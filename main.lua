@@ -34,6 +34,7 @@ Track = {
 
 XamYT = {
     Name = "XamYT",
+    Online = false,
     X = 0,
     Y = 0,
     Z = 0,
@@ -57,6 +58,7 @@ XamYT = {
 
 Z3RR0N = {
     Name = "Z3RR0N",
+    Online = false,
     X = 0,
     Y = 0,
     Z = 0,
@@ -80,6 +82,7 @@ Z3RR0N = {
 
 MustiYil = {
     Name = "MustiYil",
+    Online = false,
     X = 0,
     Y = 0,
     Z = 0,
@@ -100,6 +103,11 @@ MustiYil = {
     wasAtsec2 = false,
     LapCompletet = false
 }
+
+function UpdatePlayerOnline()
+
+end
+
 
 function UpdatePlayerPos(Name)
     Name.X = Detector.getPlayerPos(Name.Name).x
@@ -236,6 +244,7 @@ end
 
 --Trainingsfunktion
 while IsTraining do
+
     UpdatePlayerPos(XamYT)
     PlayerAtStart(XamYT)
     PlayerAtSec1(XamYT)
