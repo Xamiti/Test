@@ -92,7 +92,6 @@ function PlayerAtStart(Name)
             Name.currentLapTime = Name.sec1 + Name.sec2 + Name.sec3
 
             if Name.currentLapTime < Name.bestLapTime or Name.bestLapTime == 0 then
-                ChatBox.sendMessage("1")
                 Name.bestLapTime = Name.currentLapTime
                 Name.bestsec1 = Name.sec1
                 Name.bestsec2 = Name.sec2
@@ -112,17 +111,16 @@ function PlayerAtStart(Name)
                 if Name.currentLapTime < Track.bestLapTime or Track.bestLapTime == 0 then
                     ChatBox.sendMessage(Name.Name .. " " .. Name.currentLapTime, "Lap", "<>", "&5")
                     Track.bestLapTime = Name.currentLapTime
-                    ChatBox.sendMessage(Name.Name .. " " .. Name.currentLapTime, "Lap", "<>", "&5")
                 else
-                    ChatBox.sendMessage("3")
                     ChatBox.sendMessageToPlayer(tostring(Name.currentLapTime), Name.Name, "Lap","<>", "&a")
                 end
             else
                 ChatBox.sendMessageToPlayer(tostring(Name.currentLapTime), Name.Name, "Lap", "<>", "&e")
             end
-        else
+        else if not Name.LapCompletet then
             ChatBox.sendMessageToPlayer("Invalid Round", Name.Name, "...", "<>", "&c")
         end
+        end 
         Name.LastTime = Name.Time
         Name.lastLapTime = Name.currentLapTime
         Name.currentLapTime = 0
@@ -196,9 +194,7 @@ end
 
 --Trainingsfunktion
 while IsTraining do
-    for i, Name in ipairs(playerData) do
-        
-
+    for i, _ in ipairs(playerData) do
         UpdatePlayerPos(playerData[i])
         PlayerAtStart(playerData[i])
         PlayerAtSec1(playerData[i])
