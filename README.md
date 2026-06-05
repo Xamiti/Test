@@ -1,3 +1,3 @@
 # Test
-https://raw.githubusercontent.com/Xamiti/Test/main/main.lua
+https://raw.githubusercontent.com/Xamiti/Test/main/Racetrack.lua
 
