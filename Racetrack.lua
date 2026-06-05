@@ -77,6 +77,9 @@ function PlayerAtStart(Name)
         if Name.wasAtStart and Name.wasAtsec1 and Name.wasAtsec2 then
 
             Name.sec3 = Name.Time - Name.LastTime
+            if Name.sec3 < 0 then
+                Name.sec3 = Name.sec3 + 24
+            end
 
             --Überschreiben Sektor 3 Zeit wenn schneller und Ausgabe über Chatbox der Sektorzeit an Spieler oder alle
             if Name.sec3 < Name.bestsec3 or Name.bestsec3 == 0 then
@@ -142,6 +145,9 @@ function PlayerAtSec1(Name)
             if Name.LapCompletet then
                 Name.Time = os.time()
                 Name.sec1 = Name.Time - Name.LastTime
+                if Name.sec1 < 0 then
+                    Name.sec1 = Name.sec3 + 24
+                end
                 Name.currentLapTime = Name.currentLapTime + Name.sec1
                     -- Ausgabe der Sektorzeit über Chatbox an Spieler oder alle
                 if Name.sec1 < Name.bestsec1 or Name.bestsec1 == 0 then
@@ -171,6 +177,9 @@ function PlayerAtSec2(Name)
             if Name.wasAtStart and Name.wasAtsec1 then
                 Name.Time = os.time()
                 Name.sec2 = Name.Time - Name.LastTime
+                if Name.sec2 < 0 then
+                    Name.sec2 = Name.sec3 + 24
+                end
                 Name.currentLapTime = Name.currentLapTime + Name.sec2
                     -- Ausgabe der Sektorzeit über Chatbox an Spieler oder alle
                 if Name.sec2 < Name.bestsec2 or Name.bestsec2 == 0 then
